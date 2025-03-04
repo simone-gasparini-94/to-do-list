@@ -1,15 +1,12 @@
 import "./styles/styles.css";
-import { toDoList, addToDo, removeToDo } from "./todo.js";
+import { displayToDoList, addToDo, removeToDo, toggleComplete, sortByDate } from "./todo.js";
 
-addToDo("clean", "clean the toilet", "tomorrow", "yes");
-addToDo("groceries", "buy toothpaste", "tomorrow", "yes");
+addToDo("clean", "clean the toilet", "2025-03-08", "yes");
+addToDo("groceries", "buy toothpaste", "2025-03-05", "yes");
+addToDo("study", "study javascript", "2025-03-07", "yes");
 
-toDoList.forEach(item =>
-    console.log(item)
-);
+toggleComplete("study");
 
-removeToDo("clean");
+sortByDate();
 
-toDoList.forEach(item =>
-    console.log(item)
-);
+displayToDoList();
