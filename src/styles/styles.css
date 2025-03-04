@@ -1,16 +1,30 @@
 *, *::before, *::after {
     box-sizing: border-box;
 
-    border: 0;
+    margin: 0;
     padding: 0;
 }
 
 :root {
-    --main-color: hsl(0, 0%, 4%);
-    --bg-color: hsl(0, 0%, 96%);
+    --off-black: hsl(0, 0%, 4%);
+    --light-grey: hsl(0, 0%, 92%);
+    --off-white: hsl(0, 0%, 96%);
 }
 
 body {
-    color: var(--main-color);
-    background-color: var(--bg-color);
+    color: var(--off-black);
+    background-color: var(--off-white);
+
+    display: flex;
+
+    height: 100vh;
 }
+
+.sidebar {
+    background-color: var(--light-grey);
+
+    border-right: 0.4px solid var(--off-black);
+
+    width: 200px;
+}
+
