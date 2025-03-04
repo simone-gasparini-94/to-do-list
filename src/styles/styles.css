@@ -1,0 +1,16 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+
+    border: 0;
+    padding: 0;
+}
+
+:root {
+    --main-color: hsl(0, 0%, 4%);
+    --bg-color: hsl(0, 0%, 96%);
+}
+
+body {
+    color: var(--main-color);
+    background-color: var(--bg-color);
+}
