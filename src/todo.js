@@ -1,4 +1,5 @@
 const todoList = [];
+const completedList = [];
 const projectList = [];
 
 class Todo {
@@ -12,15 +13,48 @@ class Todo {
     }
 }
 
+class Project {
+    constructor(name) {
+        this.name = name;
+        this.list = [];
+    }
+}
+
+function createInitialProjects() {
+    const personal = new Project("personal");
+    const work = new Project("work");
+    projectList.push(personal, work);
+}
+
 export function logTodoList() {
+    console.log("todo list:");
     console.log(todoList);
+}
+
+export function logCompletedList() {
+    console.log("completed list:");
+    console.log(completedList);
+}
+
+export function logProjectList() {
+    console.log("project list:");
+    console.log(projectList);
 }
 
 export function addTodo(title, description, dueDate, priority, project) {
     const todo = new Todo(title, description, dueDate, priority, project);
     todoList.push(todo);
+    //if (project) addToProjects();
 }
 
 export function removeTodo(index) {
     todoList.splice(index, 1);
 }
+
+export function toggleComplete(index) {
+    const completed = todoList.splice(index, 1);
+    completed.completed = !completed.completed;
+    completedList.push(completed);
+}
+
+createInitialProjects();
