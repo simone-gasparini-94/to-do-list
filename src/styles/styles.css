@@ -27,8 +27,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    gap: 20px;
-    padding: 20px 0 0 0;
+    padding-top: 40px;
 }
 
 .sidebar-top-container,
@@ -52,9 +51,23 @@ body {
     display: flex;
     flex-direction: column;
     width: 100%;
+    align-items: center;
+    gap: 8px;
 }
 
-.filter,
+.filter {
+    all: unset;
+    cursor: pointer;
+    width: 80%;
+    height: 40px;
+    border-radius: 8px;
+    background-color: var(--off-white);
+}
+
+.button-text {
+    padding: 0 10px;
+}
+
 .add-project {
     all: unset;
     cursor: pointer;
@@ -65,13 +78,8 @@ body {
     box-sizing: border-box;
 }
 
-.filter:first-of-type {
-    border-top: 0.4px solid var(--off-black);
-}
-
 .main {
     flex: 1;
-    padding: 20px;
 }
 
 .top-section {
@@ -79,13 +87,27 @@ body {
     justify-content: space-between;
     width: 100%;
     align-items: center;
+    padding: 40px;
+}
+
+.project-title {
+    font-size: 40px;
 }
 
 .add-task {
+    cursor: pointer;
     width: 40px;
     height: 40px;
     border-radius: 50%;
     border: 0.4px solid var(--off-black);
+}
+
+.task-container {
+    margin-top: 40px;
+}
+
+.content-container {
+    padding: 0 40px;
 }
 
 .todo {
@@ -94,4 +116,8 @@ body {
     border-bottom: 0.4px solid var(--off-black);
     display: flex;
     align-items: center;
+}
+
+.todo:first-child {
+    border-top: 0.4px solid var(--off-black);
 }
