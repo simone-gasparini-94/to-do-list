@@ -1,4 +1,7 @@
 import "./styles/styles.css";
+import {
+    addTodoContainer,
+} from "./ui.js"
 import { 
     logTodoList,
     logCompletedList,
@@ -8,14 +11,6 @@ import {
     toggleComplete
 } from "./todo.js";
 
-addTodo("study", "study JavaScript", "2025-03-10", "high", "work");
-addTodo("study", "study JavaScript", "2025-03-10", "high", "work");
-addTodo("study", "study JavaScript", "2025-03-10", "high", "work");
+const addTodoButton = document.querySelector(".add-task");
+addTodoButton.addEventListener("click", addTodoContainer);
 
-removeTodo(2);
-
-logTodoList();
-
-toggleComplete(1);
-
-logCompletedList();

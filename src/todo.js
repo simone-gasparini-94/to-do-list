@@ -44,7 +44,7 @@ export function logProjectList() {
 export function addTodo(title, description, dueDate, priority, project) {
     const todo = new Todo(title, description, dueDate, priority, project);
     todoList.push(todo);
-    //if (project) addToProjects();
+    if (project) addToProjects(todo);
 }
 
 export function removeTodo(index) {
@@ -55,6 +55,18 @@ export function toggleComplete(index) {
     const completed = todoList.splice(index, 1);
     completed.completed = !completed.completed;
     completedList.push(completed);
+}
+
+function addToProjects(todo) {
+    const targetProject = projectList.find(project => project.name === todo.project);
+    if (!targetProject) addProject(todo);
+    if (targetProject) targetProject.list.push();
+}
+
+function addProject(todo) {
+    const project = new Project(todo.project);
+    project.list.push(todo);
+    projectList.push(project);
 }
 
 createInitialProjects();

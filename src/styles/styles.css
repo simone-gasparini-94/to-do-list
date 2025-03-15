@@ -14,17 +14,57 @@
 body {
     color: var(--off-black);
     background-color: var(--off-white);
-
     display: flex;
-
     height: 100vh;
 }
 
 .sidebar {
     background-color: var(--light-grey);
-
     border-right: 0.4px solid var(--off-black);
-
-    width: 200px;
+    width: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 20px;
 }
 
+.sidebar-top-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 0.4px solid var(--off-black);
+    background-color: var(--off-white);
+}
+
+.main {
+    flex: 1;
+    padding: 20px;
+}
+
+.top-section {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.add-task {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0.4px solid var(--off-black);
+}
+
+.todo {
+    height: 120px;
+    width: 100%;
+    background-color: var(--off-black);
+}
