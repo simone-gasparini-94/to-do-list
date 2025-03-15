@@ -47,27 +47,6 @@ body {
     background-color: var(--off-white);
 }
 
-.filter-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    align-items: center;
-    gap: 8px;
-}
-
-.filter {
-    all: unset;
-    cursor: pointer;
-    width: 80%;
-    height: 40px;
-    border-radius: 8px;
-    background-color: var(--off-white);
-}
-
-.button-text {
-    padding: 0 10px;
-}
-
 .add-project {
     all: unset;
     cursor: pointer;
@@ -87,7 +66,7 @@ body {
     justify-content: space-between;
     width: 100%;
     align-items: center;
-    padding: 40px;
+    padding: 40px 40px 20px 40px;
 }
 
 .project-title {
@@ -100,6 +79,27 @@ body {
     height: 40px;
     border-radius: 50%;
     border: 0.4px solid var(--off-black);
+}
+
+.filter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 56px;
+    padding: 0 40px;
+}
+
+.filter {
+    all: unset;
+    cursor: pointer;
+    padding: 8px 24px;
+    border: 0.4px solid var(--off-black);
+    border-radius: 24px;
+    background-color: var(--off-white);
+}
+
+#all {
+    background-color: var(--light-grey);
 }
 
 .task-container {

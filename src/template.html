@@ -9,14 +9,6 @@
     <section class="sidebar">
         <div class="sidebar-top-container">
             <div class="avatar"></div>
-            <div class="filter-container">
-                <button class="filter" id="all">
-                    <div class="button-text">All</div>
-                </button>
-                <button class="filter" id="completed">
-                    <div class="button-text">Completed</div>
-                </button>
-            </div>
         </div>
         <div class="sidebar-bottom-container">
             <button class="add-project">+ Add Project</button>
@@ -24,8 +16,19 @@
     </section>
     <section class="main">
         <div class="top-section">
-            <h1 class="project-title">All</h1>
+            <h1 class="project-title">General</h1>
             <button class="add-task">+</button>
+        </div>
+        <div class="filter-container">
+            <button class="filter" id="all">
+                <div class="button-text">All</div>
+            </button>
+            <button class="filter" id="today">
+                <div class="button-text">Today</div>
+            </button>
+            <button class="filter" id="completed">
+                <div class="button-text">Completed</div>
+            </button>
         </div>
         <div class="task-container"></div>
     </section>
