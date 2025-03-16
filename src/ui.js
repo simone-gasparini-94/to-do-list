@@ -32,9 +32,24 @@ export function addTodoUI() {
 
     console.log(projectList);
 
-    
-
     content.append(title, dueDate, priority);
     newTodo.appendChild(content);
     todoContainer.appendChild(newTodo);
+}
+
+export function displayProjects() {
+    const projectsContainer = document.querySelector(".projects-container");
+    projectList.forEach(project => {
+        console.log(project);
+        const projectBtn = document.createElement("button");
+        projectBtn.classList.add("project-btn");
+        projectBtn.textContent = project.name[0].toUpperCase() + project.name.slice(1);
+        projectsContainer.appendChild(projectBtn);
+    })
+}
+
+export function displayProject(event) {
+    const title = document.querySelector(".project-title");
+    console.log("click");
+    title.textContent = event.target.textContent;
 }

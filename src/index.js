@@ -1,6 +1,8 @@
 import "./styles/styles.css";
 import {
     addTodoUI,
+    displayProjects,
+    displayProject,
 } from "./ui.js"
 import { 
     logTodoList,
@@ -11,6 +13,14 @@ import {
     toggleComplete
 } from "./todo.js";
 
-const addTodoButton = document.querySelector(".add-task");
-addTodoButton.addEventListener("click", addTodoUI);
+document.addEventListener("DOMContentLoaded", () => {
+    displayProjects();
 
+    const addTodoBtn = document.querySelector(".add-task");
+    const projectBtns = document.querySelectorAll(".project-btn");
+
+    addTodoBtn.addEventListener("click", addTodoUI);
+    projectBtns.forEach(btn => {
+        btn.addEventListener("click", displayProject)
+    })
+})

@@ -39,12 +39,15 @@ body {
     width: 100%;
 }
 
-.avatar {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 0.4px solid var(--off-black);
-    background-color: var(--off-white);
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.project-btn {
+    cursor: pointer;
+    padding: 16px 24px;
 }
 
 .add-project {
@@ -89,16 +92,8 @@ body {
 }
 
 .filter {
-    all: unset;
     cursor: pointer;
     padding: 8px 24px;
-    border: 0.4px solid var(--off-black);
-    border-radius: 24px;
-    background-color: var(--off-white);
-}
-
-#all {
-    background-color: var(--light-grey);
 }
 
 .task-container {
