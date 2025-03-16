@@ -9,6 +9,7 @@
     --off-black: hsl(0, 0%, 4%);
     --light-grey: hsl(0, 0%, 92%);
     --off-white: hsl(0, 0%, 96%);
+    --yellow: hsl(66, 100%, 50%);
 }
 
 body {
@@ -48,6 +49,12 @@ body {
 .project-btn {
     cursor: pointer;
     padding: 16px 24px;
+    background-color: var(--off-white);
+    border: 1px solid var(--off-black);
+}
+
+.project-btn.active {
+    background-color: var(--yellow);
 }
 
 .add-project {

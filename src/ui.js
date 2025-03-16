@@ -1,5 +1,5 @@
 import {
-    projectList,
+    projectsList,
 } from "./todo.js"
 
 export function addTodoUI() {
@@ -40,7 +40,7 @@ export function addTodoUI() {
 
 export function displayProjects() {
     const projectsContainer = document.querySelector(".projects-container");
-    projectList.forEach(project => {
+    projectsList.forEach(project => {
         console.log(project);
         const projectBtn = document.createElement("button");
         projectBtn.classList.add("project-btn");
@@ -51,5 +51,7 @@ export function displayProjects() {
 
 export function displayProject(event) {
     const title = document.querySelector(".project-title");
+    const button = event.target;
+    button.classList.add("active");
     title.textContent = event.target.textContent.toUpperCase();
 }
