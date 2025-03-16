@@ -30,9 +30,10 @@ export function addTodoUI() {
         priority.appendChild(option);
     });
 
-    console.log(projectList);
+    const submit = document.createElement("input");
+    submit.type = "submit";
 
-    content.append(title, dueDate, priority);
+    content.append(title, dueDate, priority, submit);
     newTodo.appendChild(content);
     todoContainer.appendChild(newTodo);
 }
@@ -50,6 +51,5 @@ export function displayProjects() {
 
 export function displayProject(event) {
     const title = document.querySelector(".project-title");
-    console.log("click");
-    title.textContent = event.target.textContent;
+    title.textContent = event.target.textContent.toUpperCase();
 }
