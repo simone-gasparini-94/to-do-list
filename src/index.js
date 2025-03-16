@@ -1,6 +1,6 @@
 import "./styles/styles.css";
 import {
-    addTodoContainer,
+    addTodoUI,
 } from "./ui.js"
 import { 
     logTodoList,
@@ -12,5 +12,5 @@ import {
 } from "./todo.js";
 
 const addTodoButton = document.querySelector(".add-task");
-addTodoButton.addEventListener("click", addTodoContainer);
+addTodoButton.addEventListener("click", addTodoUI);
 

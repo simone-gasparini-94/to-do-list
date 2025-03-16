@@ -1,6 +1,6 @@
 const todoList = [];
 const completedList = [];
-const projectList = [];
+export const projectList = [];
 
 class Todo {
     constructor(title, description, dueDate, priority, project) {
