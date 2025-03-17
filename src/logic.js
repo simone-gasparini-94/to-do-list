@@ -25,6 +25,10 @@ class Todo {
     }
 }
 
+export function addProject(project) {
+    new Project(project);
+}
+
 function createInitialProjects() {
     new Project("personal");
     new Project("work");
@@ -41,6 +45,7 @@ function createInitialTodos() {
 
 function setActiveProject(projectName) {
     activeProject = projects.find((project) => project.name = projectName);
+    console.log(activeProject);
 }
 
 function init() {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -7,19 +9,19 @@
 :root {
     --off-white: hsl(0, 0%, 96%);
     --light-grey: hsl(0, 0%, 74%);
-    --grey: hsl(0, 0%, 50%);
+    --grey: hsl(0, 0%, 40%);
     --dark-grey: hsl(0, 0%, 22%);
     --off-black: hsl(0, 0%, 4%);
 }
 
 body {
+    font-family: 'Inter', sans-serif;
+}
+
+.main-container {
     height: 100vh;
     overscroll-behavior: none;
     display: flex;
-}
 
-#sidebar {
-    width: 12rem;
-    height: 100%;
-    border-right: 0.6px solid var(--grey);
+    color: var(--off-black);
 }
