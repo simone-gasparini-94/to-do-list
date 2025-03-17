@@ -2,40 +2,18 @@ import {
     projectsList,
 } from "./todo.js"
 
-export function addTodoUI() {
-    const todoContainer = document.querySelector(".task-container");
-    const newTodo = document.createElement("div");
-    newTodo.classList.add("todo");
 
-    const content = document.createElement("div");
-    content.classList.add("content-container");
-
-    const title = document.createElement("input");
-    title.type = "text";
-    title.placeholder = "Name..."
-    title.required = true;
-
-    const dueDate = document.createElement("input");
-    dueDate.type = "date";
-
-    const priority = document.createElement("select");
-    priority.classList.add("priority");
-
-    const priorities = ["--Priority--", "High", "Medium", "Low"];
-
-    priorities.forEach(level => {
-        const option = document.createElement("option");
-        option.value = level.toLowerCase();
-        option.textContent = level;
-        priority.appendChild(option);
-    });
-
-    const submit = document.createElement("input");
-    submit.type = "submit";
-
-    content.append(title, dueDate, priority, submit);
-    newTodo.appendChild(content);
-    todoContainer.appendChild(newTodo);
+export function displayTodos() {
+    const todosContainer = document.querySelector(".todo-container");
+    todosContainer.innerHTML = "";
+    const projectTitle = document.querySelector(".project-title");
+    const activeProject = projectsList.find(project => project.name === projectTitle.textContent.toLowerCase());
+    activeProject.list.forEach(element => {
+        const todo = document.createElement("div");
+        todo.classList.add("todo");
+        todo.textContent = element.name;
+        todosContainer.appendChild(todo);
+    })
 }
 
 export function displayProjects() {
@@ -44,14 +22,22 @@ export function displayProjects() {
         console.log(project);
         const projectBtn = document.createElement("button");
         projectBtn.classList.add("project-btn");
+        projectBtn.id = project.name;
         projectBtn.textContent = project.name[0].toUpperCase() + project.name.slice(1);
         projectsContainer.appendChild(projectBtn);
     })
+    const initialProject = document.querySelector("#personal");
+    initialProject.classList.add("active");
 }
 
 export function displayProject(event) {
     const title = document.querySelector(".project-title");
+    const projectBtns = document.querySelectorAll(".project-btn");
+    projectBtns.forEach(button => {
+        button.classList.remove("active");
+    });
     const button = event.target;
     button.classList.add("active");
-    title.textContent = event.target.textContent.toUpperCase();
+    title.textContent = button.textContent.toUpperCase();
+    displayTodos();
 }

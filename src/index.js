@@ -1,9 +1,11 @@
 import "./styles/styles.css";
+
 import {
-    addTodoUI,
+    displayTodos,
     displayProjects,
     displayProject,
 } from "./ui.js"
+
 import { 
     logTodoList,
     logCompletedList,
@@ -15,11 +17,11 @@ import {
 
 document.addEventListener("DOMContentLoaded", () => {
     displayProjects();
+    displayTodos();
 
     const addTodoBtn = document.querySelector(".add-task");
     const projectBtns = document.querySelectorAll(".project-btn");
 
-    addTodoBtn.addEventListener("click", addTodoUI);
     projectBtns.forEach(btn => {
         btn.addEventListener("click", displayProject)
     })
