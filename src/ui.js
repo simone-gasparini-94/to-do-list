@@ -1,7 +1,8 @@
-import { activeProject, projects } from "./logic";
+import { activeProject, addProject, projects } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
+    projectsContainer.innerHTML = "";
     projects.forEach((project) => {
         const projectBtn = document.createElement("button");
         projectBtn.classList.add("project-btn");
@@ -42,10 +43,21 @@ export function handleAddProject() {
         input.classList.add("text-input");
         input.type = "text";
         input.placeholder = "New..";
-        input.addEventListener("blur", handleBlur);
         projectDiv.append(svg, input);
         projectsContainer.append(projectDiv);
         input.focus();
+        input.addEventListener("keyup", handleKeyPress);
+        input.addEventListener("blur", handleBlur);
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key == "Enter" && event.target.value.trim()) {
+        console.log("enter");
+        addProject(event.target.value);
+        renderProjectsButtons();
+    } else if (event.key == "Escape") {
+        event.target.closest(".project-div").remove();
     }
 }
 
@@ -54,6 +66,5 @@ function handleBlur(event) {
         event.target.closest(".project-div").remove();
     }
 }
-
 
 
