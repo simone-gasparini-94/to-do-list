@@ -1,5 +1,4 @@
 export const projects = [];
-
 export let activeProject = null;
 
 class Project {
@@ -40,9 +39,14 @@ function createInitialTodos() {
     new Todo("buy bread", "2025-03-17", "high", "shopping");
 }
 
+function setActiveProject(projectName) {
+    activeProject = projects.find((project) => project.name = projectName);
+}
+
 function init() {
     createInitialProjects();
     createInitialTodos();
+    setActiveProject("personal");
 }
 
 init();
