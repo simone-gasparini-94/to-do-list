@@ -4,8 +4,14 @@
     flex-direction: column;
 }
 
+#top-bar {
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 #header {
-    padding: 1.2rem 1.6rem;
     display: flex;
     flex-direction: column;
 }
@@ -16,8 +22,19 @@
 }
 
 .header-project {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--light-grey);
+}
+
+#add-todo-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.8rem;
+    gap: 0.2rem;
+    color: var(--grey);
 }
 
 .filters-container {
@@ -33,7 +50,6 @@
     all: unset;
     cursor: pointer;
     border-right: 0.6px solid var(--grey);
-
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,16 +71,18 @@
     width: 100%;
 }
 
-.todo {
+.todo,
+.new-todo-div {
     display: flex;
     border-bottom: 0.6px solid var(--grey);
     align-items: center;
-    padding: 0.8rem;
+    padding: 0.8rem 2rem;
     height: 4rem;
     gap: 1rem;
 }
 
-.checkbox {
+.checkbox,
+.fake-checkbox {
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -78,12 +96,55 @@
     background-color: var(--light-grey);
 }
 
-.text-container {
-    display: flex;
-    flex-direction: column;
+.text-container,
+.inputs-container {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
 }
 
 .date {
     font-size: 0.8rem;
     color: var(--grey);
+    text-align: center;
+}
+
+.todo-title-input {
+    font-size: 1rem;
+    color: var(--dark-grey);
+    border: none;
+    height: 1.6rem;
+}
+
+.todo-title-input:focus {
+    outline: none;
+}
+
+.due-to-container {
+    display: flex;
+    justify-content: center;
+}
+
+.todo-due-to-input {
+    height: 1.6rem;
+    width: 8rem;
+    text-align: center;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    color: var(--grey);
+    cursor: pointer;
+}
+
+.todo-due-to-input:focus {
+    outline: none;
+}
+
+.submit-to-do-btn {
+    all: unset;
+    cursor: pointer;
+    font-size: 0.6rem;
+    border: 1px solid var(--grey);
+    padding: 0.2rem 0.4rem;
+    border-radius: 20px;
 }

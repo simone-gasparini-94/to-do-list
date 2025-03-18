@@ -2,7 +2,7 @@ import './styles/global.css';
 import './styles/sidebar.css';
 import './styles/main.css';
 
-import { changeActiveProject, setHeader, handleAddProject, renderActiveProjectTasks, renderProjectsButtons } from './ui';
+import { changeActiveProject, setHeader, handleAddProject, renderActiveProjectTasks, renderProjectsButtons, handleAddTodo } from './ui';
 
 document.addEventListener("DOMContentLoaded", () => {
     renderProjectsButtons();
@@ -16,4 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         button.addEventListener("click", renderActiveProjectTasks);
         button.addEventListener("click", setHeader);
     })
+    const addTodoBtn = document.querySelector("#add-todo-btn");
+    addTodoBtn.addEventListener("click", handleAddTodo);
 })

@@ -11,10 +11,9 @@ class Project {
 }
 
 class Todo {
-    constructor(title, dueTo, priority, projectName) {
+    constructor(title, dueTo, projectName) {
         this.title = title;
         this.dueTo = dueTo;
-        this.priority = priority;
         this.project = projectName;
 
         projects.forEach((project) => {
@@ -24,6 +23,11 @@ class Todo {
             }
         })
     }
+}
+
+export function addTodo(title, dueTo, projectName) {
+    const newTodo = new Todo(title, dueTo, projectName);
+    console.log(newTodo);
 }
 
 export function getProjects() {
@@ -42,6 +46,8 @@ export function addProject(project) {
     new Project(project);
 }
 
+
+
 function createInitialProjects() {
     new Project("personal");
     new Project("work");
@@ -50,12 +56,12 @@ function createInitialProjects() {
 }
 
 function createInitialTodos() {
-    new Todo("read a book", "2025-04-01", "low", "personal");
-    new Todo("study german", "2025-04-20", 'high', "personal");
-    new Todo("go for a walk", "2025-03-19", "medium", "personal")
-    new Todo("schedule meeting", "2025-03-20", "high", "work");
-    new Todo("clean kitchen", "2025-03-18", "medium", "home");
-    new Todo("buy bread", "2025-03-17", "high", "shopping");
+    new Todo("read a book", "2025-04-01", "personal");
+    new Todo("study german", "2025-04-20", "personal");
+    new Todo("go for a walk", "2025-03-19", "personal")
+    new Todo("schedule meeting", "2025-03-20", "work");
+    new Todo("clean kitchen", "2025-03-18", "home");
+    new Todo("buy bread", "2025-03-17", "shopping");
 }
 
 function init() {

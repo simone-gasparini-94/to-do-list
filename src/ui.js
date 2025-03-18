@@ -1,4 +1,4 @@
-import { addProject, getActiveProject, getProjects, setActiveProject } from "./logic";
+import { addTodo, addProject, getActiveProject, getProjects, setActiveProject } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
@@ -25,11 +25,66 @@ export function renderProjectsButtons() {
     })
 }
 
+export function handleAddTodo() {
+    const todoContainer = document.querySelector(".todo-container");
+    if (!todoContainer.querySelector(".new-todo-div")) {
+        let activeProject = getActiveProject();
+        console.log(activeProject);
+        const todoDiv = document.createElement("div");
+        todoDiv.classList.add("new-todo-div");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.disabled = true;
+        checkbox.classList.add("fake-checkbox");
+        const inputsContainer = document.createElement("div");
+        inputsContainer.classList.add("inputs-container")
+        const titleInput = document.createElement("input");
+        titleInput.classList.add("todo-title-input");
+        titleInput.type = "text";
+        titleInput.placeholder = "don't forget to...";
+        const dueToContainer = document.createElement("div");
+        dueToContainer.classList.add("due-to-container");
+        const dueTo = document.createElement("input");
+        dueTo.classList.add("todo-due-to-input");
+        dueTo.type = "date";
+        const submitBtn = document.createElement("button");
+        submitBtn.classList.add("submit-to-do-btn");
+        submitBtn.textContent = "ADD";
+        dueToContainer.append(dueTo)
+        inputsContainer.append(titleInput, dueToContainer);
+        todoDiv.append(checkbox, inputsContainer, submitBtn);
+        todoContainer.prepend(todoDiv);
+        titleInput.focus();
+        submitBtn.addEventListener("click", (event) => {
+            handleAddPressTodo(event, titleInput, dueTo, activeProject);
+        })
+        todoDiv.addEventListener("keyup", (event) => {
+            handleKeyPressTodo(event, titleInput, dueTo, activeProject);
+        });
+    } 
+}
+
+function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
+    if (event.key === "Enter" && titleInput.value.trim()) {
+        addTodo(titleInput.value, dueTo.value, activeProject.name);
+        renderActiveProjectTasks();
+    } else if (event.key === "Escape") {
+        console.log("Escape");
+    }
+}
+
+function handleAddPressTodo(event, titleInput, dueTo, activeProject) {
+    if (titleInput.value.trim()) {
+        addTodo(titleInput.value, dueTo.value, activeProject.name);
+        renderActiveProjectTasks();
+    }
+}
+
 export function handleAddProject() {
     const projectsContainer = document.querySelector(".projects-container");
-    if (!projectsContainer.querySelector(".project-div")) {
+    if (!projectsContainer.querySelector(".new-project-div")) {
         const projectDiv = document.createElement("div");
-        projectDiv.classList.add("project-div");
+        projectDiv.classList.add("new-project-div");
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("width", "25");
         svg.setAttribute("height", "25");
@@ -47,23 +102,23 @@ export function handleAddProject() {
         projectDiv.append(svg, input);
         projectsContainer.append(projectDiv);
         input.focus();
-        input.addEventListener("keyup", handleKeyPress);
-        input.addEventListener("blur", handleBlur);
+        input.addEventListener("keyup", handleKeyPressProject);
+        input.addEventListener("blur", handleBlurProject);
     }
 }
 
-function handleKeyPress(event) {
+function handleKeyPressProject(event) {
     if (event.key == "Enter" && event.target.value.trim()) {
         addProject(event.target.value);
         renderProjectsButtons();
     } else if (event.key == "Escape") {
-        event.target.closest(".project-div").remove();
+        event.target.closest(".new-project-div").remove();
     }
 }
 
-function handleBlur(event) {
+function handleBlurProject(event) {
     if (!event.target.value.trim()) {
-        event.target.closest(".project-div").remove();
+        event.target.closest(".new-project-div").remove();
     }
 }
 
