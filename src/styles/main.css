@@ -148,3 +148,11 @@
     padding: 0.2rem 0.4rem;
     border-radius: 20px;
 }
+
+.delete-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
