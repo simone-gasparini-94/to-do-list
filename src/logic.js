@@ -1,5 +1,5 @@
 export const projects = [];
-export let activeProject = null;
+let activeProject = null;
 
 class Project {
     constructor(name){

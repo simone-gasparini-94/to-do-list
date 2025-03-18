@@ -1,4 +1,4 @@
-import { addProject, activeProject, getActiveProject, projects, setActiveProject } from "./logic";
+import { addProject, getActiveProject, projects, setActiveProject } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
@@ -70,7 +70,7 @@ function handleBlur(event) {
 export function renderActiveProjectTasks() {
     const tasksContainer = document.querySelector(".tasks-container");
     tasksContainer.innerHTML = "";
-    activeProject.list.forEach((todo) => {
+    getActiveProject().list.forEach((todo) => {
         const div = document.createElement("div");
         div.classList.add("task-container");
         const span = document.createElement("span");
@@ -82,9 +82,6 @@ export function renderActiveProjectTasks() {
 }
 
 export function changeActiveProject(event) {
-    console.log(event.currentTarget.id);
-    console.log(getActiveProject());
     setActiveProject(event.currentTarget.id);
-    console.log(getActiveProject());
 }
 

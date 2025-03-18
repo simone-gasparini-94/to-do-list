@@ -2,7 +2,6 @@ import './styles/global.css';
 import './styles/sidebar.css';
 import './styles/main.css';
 
-import { activeProject, projects } from "./logic";
 import { changeActiveProject, handleAddProject, renderActiveProjectTasks, renderProjectsButtons } from './ui';
 
 document.addEventListener("DOMContentLoaded", () => {
