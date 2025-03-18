@@ -1,4 +1,4 @@
-import { activeProject, addProject, projects } from "./logic";
+import { addProject, activeProject, getActiveProject, projects, setActiveProject } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
@@ -6,6 +6,7 @@ export function renderProjectsButtons() {
     projects.forEach((project) => {
         const projectBtn = document.createElement("button");
         projectBtn.classList.add("project-btn");
+        projectBtn.id = project.name;
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
         svg.setAttribute("width", "25");
         svg.setAttribute("height", "25");
@@ -53,7 +54,6 @@ export function handleAddProject() {
 
 function handleKeyPress(event) {
     if (event.key == "Enter" && event.target.value.trim()) {
-        console.log("enter");
         addProject(event.target.value);
         renderProjectsButtons();
     } else if (event.key == "Escape") {
@@ -67,4 +67,24 @@ function handleBlur(event) {
     }
 }
 
+export function renderActiveProjectTasks() {
+    const tasksContainer = document.querySelector(".tasks-container");
+    tasksContainer.innerHTML = "";
+    activeProject.list.forEach((todo) => {
+        const div = document.createElement("div");
+        div.classList.add("task-container");
+        const span = document.createElement("span");
+        span.classList.add("task-title");
+        span.textContent = todo.title;
+        div.append(span);
+        tasksContainer.append(div);
+    })
+}
+
+export function changeActiveProject(event) {
+    console.log(event.currentTarget.id);
+    console.log(getActiveProject());
+    setActiveProject(event.currentTarget.id);
+    console.log(getActiveProject());
+}
 
