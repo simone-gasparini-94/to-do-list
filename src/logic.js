@@ -30,6 +30,12 @@ export function addTodo(title, dueTo, projectName) {
     console.log(newTodo);
 }
 
+//finish this function
+export function deleteTodo(title) {
+    console.log(activeProject);
+    activeProject.list.find((todo) => todo.title === title)
+}
+
 export function getProjects() {
     return projects;
 }

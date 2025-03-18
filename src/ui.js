@@ -1,4 +1,4 @@
-import { addTodo, addProject, getActiveProject, getProjects, setActiveProject } from "./logic";
+import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
@@ -160,8 +160,12 @@ export function renderActiveProjectTasks() {
         textContainer.append(span, date);
         div.append(checkbox, textContainer, deleteBtn);
         todoContainer.append(div);
+        deleteBtn.addEventListener("click", () => {
+            deleteTodo(span); //finish this function
+        });
     })
 }
+
 
 export function changeActiveProject(event) {
     setActiveProject(event.currentTarget.id);
