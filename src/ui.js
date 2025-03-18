@@ -1,9 +1,9 @@
-import { addProject, getActiveProject, projects, setActiveProject } from "./logic";
+import { addProject, getActiveProject, getProjects, setActiveProject } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
     projectsContainer.innerHTML = "";
-    projects.forEach((project) => {
+    getProjects().forEach((project) => {
         const projectBtn = document.createElement("button");
         projectBtn.classList.add("project-btn");
         projectBtn.id = project.name;
@@ -68,20 +68,35 @@ function handleBlur(event) {
 }
 
 export function renderActiveProjectTasks() {
-    const tasksContainer = document.querySelector(".tasks-container");
-    tasksContainer.innerHTML = "";
+    const todoContainer = document.querySelector(".todo-container");
+    todoContainer.innerHTML = "";
     getActiveProject().list.forEach((todo) => {
         const div = document.createElement("div");
-        div.classList.add("task-container");
+        div.classList.add("todo");
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("checkbox");
+        const textContainer = document.createElement("div");
+        textContainer.classList.add("text-container")
         const span = document.createElement("span");
         span.classList.add("task-title");
         span.textContent = todo.title;
-        div.append(span);
-        tasksContainer.append(div);
+        const date = document.createElement("span");
+        date.classList.add("date");
+        date.textContent = todo.dueTo;
+        textContainer.append(span, date);
+        div.append(checkbox, textContainer);
+        todoContainer.append(div);
     })
 }
 
 export function changeActiveProject(event) {
     setActiveProject(event.currentTarget.id);
+}
+
+export function setHeader() {
+    const header = document.querySelector(".header-project-name");
+    const projectName = getActiveProject().name.toUpperCase();
+    header.textContent = projectName;
 }
 

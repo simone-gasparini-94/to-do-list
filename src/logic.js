@@ -1,4 +1,4 @@
-export const projects = [];
+const projects = [];
 let activeProject = null;
 
 class Project {
@@ -8,7 +8,7 @@ class Project {
 
         projects.push(this);
     }
-};
+}
 
 class Todo {
     constructor(title, dueTo, priority, projectName) {
@@ -20,9 +20,22 @@ class Todo {
         projects.forEach((project) => {
             if(projectName === project.name) {
                 project.list.push(this);
+                project.list.sort((a, b) => new Date(a.dueTo) - new Date(b.dueTo));
             }
         })
     }
+}
+
+export function getProjects() {
+    return projects;
+}
+
+export function getActiveProject() {
+    return activeProject;
+}
+
+export function setActiveProject(projectName) {
+    activeProject = projects.find((project) => project.name === projectName);
 }
 
 export function addProject(project) {
@@ -43,14 +56,6 @@ function createInitialTodos() {
     new Todo("schedule meeting", "2025-03-20", "high", "work");
     new Todo("clean kitchen", "2025-03-18", "medium", "home");
     new Todo("buy bread", "2025-03-17", "high", "shopping");
-}
-
-export function getActiveProject() {
-    return activeProject;
-}
-
-export function setActiveProject(projectName) {
-    activeProject = projects.find((project) => project.name === projectName);
 }
 
 function init() {

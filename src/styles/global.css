@@ -23,5 +23,5 @@ body {
     overscroll-behavior: none;
     display: flex;
 
-    color: var(--off-black);
+    color: var(--dark-grey);
 }
