@@ -1,4 +1,4 @@
-import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject } from "./logic";
+import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject, filterAll, filterToday, filterCompleted, getFilteredTodos } from "./logic";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
@@ -23,7 +23,7 @@ export function renderProjectsButtons() {
         projectBtn.append(svg, span);
         projectsContainer.append(projectBtn);
         projectBtn.addEventListener("click", changeActiveProject);
-        projectBtn.addEventListener("click", renderActiveProjectTasks);
+        projectBtn.addEventListener("click", renderTodos);
         projectBtn.addEventListener("click", setHeader);
     })
 }
@@ -69,7 +69,7 @@ export function handleAddTodo() {
 function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
     if (event.key === "Enter" && titleInput.value.trim()) {
         addTodo(titleInput.value, dueTo.value, activeProject.name);
-        renderActiveProjectTasks();
+        renderTodos();
     } else if (event.key === "Escape") {
         console.log("Escape");
     }
@@ -78,7 +78,7 @@ function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
 function handleAddPressTodo(titleInput, dueTo, activeProject) {
     if (titleInput.value.trim()) {
         addTodo(titleInput.value, dueTo.value, activeProject.name);
-        renderActiveProjectTasks();
+        renderTodos();
     }
 }
 
@@ -126,10 +126,10 @@ function handleBlurProject(event) {
     }
 }
 
-export function renderActiveProjectTasks() {
+export function renderTodos() {
     const todoContainer = document.querySelector(".todo-container");
     todoContainer.innerHTML = "";
-    getActiveProject().list.forEach((todo) => {
+    getFilteredTodos().forEach((todo) => {
         const div = document.createElement("div");
         div.classList.add("todo");
         const checkbox = document.createElement("input");
@@ -161,7 +161,7 @@ export function renderActiveProjectTasks() {
         todoContainer.append(div);
         deleteBtn.addEventListener("click", () => {
             deleteTodo(span.textContent);
-            renderActiveProjectTasks();
+            renderTodos();
         });
     })
 }
@@ -181,5 +181,18 @@ export function changeActiveFilter(event) {
     const filterBtns = document.querySelectorAll(".filter");
     filterBtns.forEach(btn => btn.classList.remove("active"));
     event.currentTarget.classList.add("active");
+    if (event.currentTarget.id === "all-filter-btn") {
+        filterAll();
+        renderTodos();
+    }
+    if (event.currentTarget.id === "today-filter-btn") {
+        filterToday();
+        renderTodos();
+    }
+    if (event.currentTarget.id === "completed-filter-btn") {
+        filterCompleted();
+        renderTodos();
+    }
 }
+
 

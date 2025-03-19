@@ -1,5 +1,6 @@
 const projects = [];
 let activeProject = null;
+let filteredTodos = null;
 
 class Project {
     constructor(name){
@@ -15,6 +16,7 @@ class Todo {
         this.title = title;
         this.dueTo = dueTo;
         this.project = projectName;
+        this.completed = false;
 
         projects.forEach((project) => {
             if(projectName === project.name) {
@@ -46,11 +48,29 @@ export function setActiveProject(projectName) {
     activeProject = projects.find((project) => project.name === projectName);
 }
 
+export function getFilteredTodos() {
+    return filteredTodos;
+}
+
 export function addProject(project) {
     new Project(project);
 }
 
+export function filterAll() {
+    filteredTodos = activeProject.list.filter(todo => todo.completed === false);
+    console.log(filteredTodos);
+}
 
+export function filterToday() {
+    const today = new Date().toISOString().slice(0, 10);
+    filteredTodos = activeProject.list.filter(todo => todo.completed === false).filter(todo => todo.dueTo === today);
+    console.log(filteredTodos);
+}
+
+export function filterCompleted() {
+    filteredTodos = activeProject.list.filter(todo => todo.completed === true);
+    console.log(filteredTodos);
+}
 
 function createInitialProjects() {
     new Project("personal");
