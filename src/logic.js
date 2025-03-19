@@ -26,8 +26,7 @@ class Todo {
 }
 
 export function addTodo(title, dueTo, projectName) {
-    const newTodo = new Todo(title, dueTo, projectName);
-    console.log(newTodo);
+    new Todo(title, dueTo, projectName);
 }
 
 export function deleteTodo(title) {

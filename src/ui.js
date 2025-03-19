@@ -32,7 +32,6 @@ export function handleAddTodo() {
     const todoContainer = document.querySelector(".todo-container");
     if (!todoContainer.querySelector(".new-todo-div")) {
         let activeProject = getActiveProject();
-        console.log(activeProject);
         const todoDiv = document.createElement("div");
         todoDiv.classList.add("new-todo-div");
         const checkbox = document.createElement("input");
@@ -58,8 +57,8 @@ export function handleAddTodo() {
         todoDiv.append(checkbox, inputsContainer, submitBtn);
         todoContainer.prepend(todoDiv);
         titleInput.focus();
-        submitBtn.addEventListener("click", (event) => {
-            handleAddPressTodo(event, titleInput, dueTo, activeProject);
+        submitBtn.addEventListener("click", () => {
+            handleAddPressTodo(titleInput, dueTo, activeProject);
         })
         todoDiv.addEventListener("keyup", (event) => {
             handleKeyPressTodo(event, titleInput, dueTo, activeProject);
@@ -76,7 +75,7 @@ function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
     }
 }
 
-function handleAddPressTodo(event, titleInput, dueTo, activeProject) {
+function handleAddPressTodo(titleInput, dueTo, activeProject) {
     if (titleInput.value.trim()) {
         addTodo(titleInput.value, dueTo.value, activeProject.name);
         renderActiveProjectTasks();
@@ -168,7 +167,7 @@ export function renderActiveProjectTasks() {
 }
 
 
-export function changeActiveProject(event) {
+function changeActiveProject(event) {
     setActiveProject(event.currentTarget.id);
 }
 
@@ -176,5 +175,11 @@ export function setHeader() {
     const header = document.querySelector(".header-project-name");
     const projectName = getActiveProject().name.toUpperCase();
     header.textContent = projectName;
+}
+
+export function changeActiveFilter(event) {
+    const filterBtns = document.querySelectorAll(".filter");
+    filterBtns.forEach(btn => btn.classList.remove("active"));
+    event.currentTarget.classList.add("active");
 }
 
