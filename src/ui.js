@@ -23,7 +23,7 @@ export function renderProjectsButtons() {
         projectBtn.append(svg, span);
         projectsContainer.append(projectBtn);
         projectBtn.addEventListener("click", changeActiveProject);
-        projectBtn.addEventListener("click", changeFilterToAll);
+        projectBtn.addEventListener("click", findActiveFilter);
         projectBtn.addEventListener("click", renderTodos);
         projectBtn.addEventListener("click", setHeader);
     })
@@ -176,11 +176,29 @@ export function setHeader() {
     header.textContent = projectName;
 }
 
+export function findActiveFilter() {
+    const activeFilter = document.querySelector(".filter.active");
+    console.log(activeFilter);
+    if (activeFilter.id === "all-filter-btn") {
+        filterAll();
+        renderTodos();
+    }
+    if (activeFilter.id === "today-filter-btn") {
+        filterToday();
+        renderTodos();
+    }
+    if (activeFilter.id === "completed-filter-btn") {
+        filterCompleted();
+        renderTodos();
+    }
+}
+
 export function changeActiveFilter(event) {
     const filterBtns = document.querySelectorAll(".filter");
     filterBtns.forEach(btn => btn.classList.remove("active"));
     event.currentTarget.classList.add("active");
     const activeFilter = document.querySelector(".filter.active");
+    console.log(activeFilter);
     if (activeFilter.id === "all-filter-btn") {
         filterAll();
         renderTodos();
