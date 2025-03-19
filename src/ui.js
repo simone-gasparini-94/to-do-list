@@ -161,7 +161,8 @@ export function renderActiveProjectTasks() {
         div.append(checkbox, textContainer, deleteBtn);
         todoContainer.append(div);
         deleteBtn.addEventListener("click", () => {
-            deleteTodo(span); //finish this function
+            deleteTodo(span.textContent);
+            renderActiveProjectTasks();
         });
     })
 }
