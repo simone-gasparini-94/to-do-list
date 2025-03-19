@@ -2,12 +2,11 @@ import './styles/global.css';
 import './styles/sidebar.css';
 import './styles/main.css';
 
-import { setHeader, handleAddProject, renderTodos, renderProjectsButtons, handleAddTodo, changeActiveFilter } from './ui';
-import { filterAll } from './logic';
+import { setHeader, handleAddProject, renderTodos, renderProjectsButtons, handleAddTodo, changeActiveFilter, changeFilterToAll } from './ui';
 
 document.addEventListener("DOMContentLoaded", () => {
     renderProjectsButtons();
-    filterAll();
+    changeFilterToAll();
     renderTodos();
     setHeader();
     const addProjectBtn = document.querySelector("#add-project-btn");

@@ -58,7 +58,6 @@ export function addProject(project) {
 
 export function filterAll() {
     filteredTodos = activeProject.list.filter(todo => todo.completed === false);
-    console.log(filteredTodos);
 }
 
 export function filterToday() {
