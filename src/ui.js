@@ -1,4 +1,5 @@
 import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject, filterAll, filterToday, filterCompleted, getFilteredTodos } from "./logic";
+import { format } from "date-fns";
 
 export function renderProjectsButtons() {
     const projectsContainer = document.querySelector(".projects-container");
@@ -164,7 +165,7 @@ export function renderTodos() {
         span.textContent = todo.title;
         const date = document.createElement("span");
         date.classList.add("date");
-        date.textContent = todo.dueTo;
+        date.textContent = format(todo.dueTo, "dd/MM/yyyy");
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-btn");
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");

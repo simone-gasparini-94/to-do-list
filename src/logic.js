@@ -14,14 +14,14 @@ class Project {
 class Todo {
     constructor(title, dueTo, projectName) {
         this.title = title;
-        this.dueTo = dueTo;
+        this.dueTo = new Date(dueTo);
         this.project = projectName;
         this.completed = false;
 
         projects.forEach((project) => {
             if(projectName === project.name) {
                 project.list.push(this);
-                project.list.sort((a, b) => new Date(a.dueTo) - new Date(b.dueTo));
+                project.list.sort((a, b) => a.dueTo - b.dueTo);
             }
         })
     }
