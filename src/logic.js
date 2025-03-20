@@ -63,7 +63,6 @@ export function filterAll() {
 export function filterToday() {
     const today = new Date().toISOString().slice(0, 10);
     filteredTodos = activeProject.list.filter(todo => todo.completed === false).filter(todo => todo.dueTo === today);
-    console.log(filteredTodos);
 }
 
 export function filterCompleted() {
