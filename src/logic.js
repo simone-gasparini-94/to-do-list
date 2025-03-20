@@ -116,11 +116,9 @@ export function createInitialTodos() {
 
 export function saveToLocalStorage() {
     const projects = getProjects();
-    
     const data = {
         projects: projects,
     };
-
     localStorage.setItem('todoAppData', JSON.stringify(data));
 }
 

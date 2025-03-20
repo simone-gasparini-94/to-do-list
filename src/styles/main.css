@@ -40,6 +40,7 @@
 }
 
 #remove-project-btn.invisible {
+    pointer-events: none;
     color: transparent;
 }
 
