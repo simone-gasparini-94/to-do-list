@@ -11,6 +11,12 @@
     align-items: center;
 }
 
+.top-bar-left {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+}
+
 #header {
     display: flex;
     flex-direction: column;
@@ -24,6 +30,17 @@
 .header-project {
     font-size: 1.4rem;
     color: var(--light-grey);
+}
+
+#remove-project-btn {
+    all: unset;
+    cursor: pointer;
+    display: flex;
+    color: var(--grey);
+}
+
+#remove-project-btn.invisible {
+    color: transparent;
 }
 
 #add-todo-btn {

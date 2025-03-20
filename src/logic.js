@@ -71,6 +71,13 @@ export function addProject(project) {
     saveToLocalStorage();
 }
 
+export function removeProject(projectName) {
+    const projects = getProjects();
+    let index = projects.findIndex((project) => project.name === projectName);
+    projects.splice(index, 1);
+    saveToLocalStorage();
+}
+
 export function filterAll() {
     filteredTodos = activeProject.list.filter(todo => todo.completed === false);
 }
@@ -102,11 +109,9 @@ export function createInitialTodos() {
 
 export function saveToLocalStorage() {
     const projects = getProjects();
-    const activeProject = getActiveProject();
     
     const data = {
         projects: projects,
-        activeProject: activeProject ? activeProject.name : null,
     };
 
     localStorage.setItem('todoAppData', JSON.stringify(data));
@@ -116,15 +121,21 @@ export function init() {
     const savedData = localStorage.getItem('todoAppData');
     if (savedData) {
         const data = JSON.parse(savedData);
-        data.projects.forEach((projectData) => {
-            const project = new Project(projectData.name);
-            projectData.list.forEach((todoData) => {
-                new Todo(todoData.title, todoData.dueTo, project.name, todoData.completed); // Add saved todos to projects
+        if (data.projects && data.projects.length > 0) {
+            data.projects.forEach((projectData) => {
+                const project = new Project(projectData.name);
+                projectData.list.forEach((todoData) => {
+                    new Todo(todoData.title, todoData.dueTo, project.name, todoData.completed); // Add saved todos to projects
+                });
             });
-        });
+        } else {
+            createInitialProjects();
+            createInitialTodos();
+        }
     } else {
         createInitialProjects();
         createInitialTodos();
     }
-    setActiveProject("personal");
+    const projects = getProjects();
+    setActiveProject(projects[0].name);
 }

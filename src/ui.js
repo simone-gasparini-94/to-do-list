@@ -1,4 +1,4 @@
-import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject, filterAll, filterToday, filterCompleted, getFilteredTodos, toggleComplete } from "./logic";
+import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject, filterAll, filterToday, filterCompleted, getFilteredTodos, toggleComplete, removeProject } from "./logic";
 import { format } from "date-fns";
 
 export function renderProjectsButtons() {
@@ -147,6 +147,17 @@ function handleBlurProject(event) {
     if (!event.target.value.trim()) {
         event.target.closest(".new-project-div").remove();
     }
+}
+
+export function handleRemoveProject() {
+    const projects = getProjects();
+    const activeProject = getActiveProject();
+    removeProject(activeProject.name);
+    setActiveProject(projects[0].name);
+    renderProjectsButtons();
+    changeFilterToAll();
+    renderTodos();
+    setHeader();
 }
 
 export function renderTodos() {
