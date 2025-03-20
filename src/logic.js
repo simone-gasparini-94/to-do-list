@@ -14,11 +14,11 @@ class Project {
 }
 
 class Todo {
-    constructor(title, dueTo, projectName) {
+    constructor(title, dueTo, projectName, completed) {
         this.title = title;
         this.dueTo = dueTo ? new Date(dueTo) : null;
         this.project = projectName;
-        this.completed = false;
+        this.completed = completed;
 
         projects.forEach((project) => {
             if(projectName === project.name) {
@@ -29,13 +29,15 @@ class Todo {
     }
 }
 
-export function addTodo(title, dueTo, projectName) {
-    new Todo(title, dueTo, projectName);
+export function addTodo(title, dueTo, projectName, completed) {
+    new Todo(title, dueTo, projectName, completed);
+    saveToLocalStorage();
 }
 
 export function deleteTodo(title) {
     let index = activeProject.list.findIndex((todo) => todo.title === title);
     activeProject.list.splice(index, 1);
+    saveToLocalStorage();
 }
 
 export function toggleComplete(title) {
@@ -45,6 +47,7 @@ export function toggleComplete(title) {
     } else {
         todo.completed = false;
     }
+    saveToLocalStorage();
 }
 
 export function getProjects() {
@@ -65,6 +68,7 @@ export function getFilteredTodos() {
 
 export function addProject(project) {
     new Project(project);
+    saveToLocalStorage();
 }
 
 export function filterAll() {
@@ -80,26 +84,47 @@ export function filterCompleted() {
     filteredTodos = activeProject.list.filter(todo => todo.completed === true);
 }
 
-function createInitialProjects() {
+export function createInitialProjects() {
     new Project("personal");
     new Project("work");
     new Project("home");
     new Project("shopping");
 }
 
-function createInitialTodos() {
-    new Todo("read a book", "2025-04-01", "personal");
-    new Todo("study german", "2025-04-20", "personal");
-    new Todo("go for a walk", "2025-03-19", "personal")
-    new Todo("schedule meeting", "2025-03-20", "work");
-    new Todo("clean kitchen", "2025-03-18", "home");
-    new Todo("buy bread", "2025-03-17", "shopping");
+export function createInitialTodos() {
+    new Todo("read a book", "2025-04-01", "personal", false);
+    new Todo("study german", "2025-04-20", "personal", false);
+    new Todo("go for a walk", "2025-03-19", "personal", false);
+    new Todo("schedule meeting", "2025-03-20", "work", false);
+    new Todo("clean kitchen", "2025-03-18", "home", false);
+    new Todo("buy bread", "2025-03-17", "shopping", false);
 }
 
-function init() {
-    createInitialProjects();
-    createInitialTodos();
+export function saveToLocalStorage() {
+    const projects = getProjects();
+    const activeProject = getActiveProject();
+    
+    const data = {
+        projects: projects,
+        activeProject: activeProject ? activeProject.name : null,
+    };
+
+    localStorage.setItem('todoAppData', JSON.stringify(data));
+}
+
+export function init() {
+    const savedData = localStorage.getItem('todoAppData');
+    if (savedData) {
+        const data = JSON.parse(savedData);
+        data.projects.forEach((projectData) => {
+            const project = new Project(projectData.name);
+            projectData.list.forEach((todoData) => {
+                new Todo(todoData.title, todoData.dueTo, project.name, todoData.completed); // Add saved todos to projects
+            });
+        });
+    } else {
+        createInitialProjects();
+        createInitialTodos();
+    }
     setActiveProject("personal");
 }
-
-init();

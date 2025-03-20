@@ -3,8 +3,10 @@ import './styles/sidebar.css';
 import './styles/main.css';
 
 import { setHeader, handleAddProject, renderTodos, renderProjectsButtons, handleAddTodo, changeActiveFilter, changeFilterToAll } from './ui';
+import { init } from './logic';
 
 document.addEventListener("DOMContentLoaded", () => {
+    init();
     renderProjectsButtons();
     changeFilterToAll();
     renderTodos();
@@ -17,4 +19,4 @@ document.addEventListener("DOMContentLoaded", () => {
     filterBtns.forEach(btn => {
         btn.addEventListener("click", changeActiveFilter);
     })
-})
+});

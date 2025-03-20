@@ -234,7 +234,3 @@ export function changeFilterToAll() {
     filterAllBtn.classList.add("active");
     renderFilteredTodos();
 }
-
-
-
-
