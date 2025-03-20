@@ -79,16 +79,23 @@ export function removeProject(projectName) {
 }
 
 export function filterAll() {
-    filteredTodos = activeProject.list.filter(todo => todo.completed === false);
+    if (activeProject) {
+        filteredTodos = activeProject.list.filter(todo => todo.completed === false);
+    }
 }
 
 export function filterToday() {
     const today = format(new Date(), "dd.MM.yyyy");
-    filteredTodos = activeProject.list.filter(todo => todo.completed === false).filter(todo => format(todo.dueTo, "dd.MM.yyyy") === today);
+    if (activeProject) {
+        filteredTodos = activeProject.list.filter(todo => todo.completed === false).filter(todo => format(todo.dueTo, "dd.MM.yyyy") === today);
+    }
 }
 
+
 export function filterCompleted() {
-    filteredTodos = activeProject.list.filter(todo => todo.completed === true);
+    if (activeProject) {
+        filteredTodos = activeProject.list.filter(todo => todo.completed === true);
+    }
 }
 
 export function createInitialProjects() {

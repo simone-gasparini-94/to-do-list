@@ -153,7 +153,11 @@ export function handleRemoveProject() {
     const projects = getProjects();
     const activeProject = getActiveProject();
     removeProject(activeProject.name);
-    setActiveProject(projects[0].name);
+    if (projects.length > 0) {
+        setActiveProject(projects[0].name);
+    } else {
+        setActiveProject("");
+    }
     renderProjectsButtons();
     changeFilterToAll();
     renderTodos();
@@ -204,15 +208,17 @@ export function renderTodos() {
     })
 }
 
-
 function changeActiveProject(event) {
     setActiveProject(event.currentTarget.id);
 }
 
 export function setHeader() {
-    const header = document.querySelector(".header-project-name");
-    const projectName = getActiveProject().name.toUpperCase();
-    header.textContent = projectName;
+    const activeProject = getActiveProject();
+    if (activeProject) {
+        const header = document.querySelector(".header-project-name");
+        const projectName = getActiveProject().name.toUpperCase();
+        header.textContent = projectName;
+    }
 }
 
 export function renderFilteredTodos() {
