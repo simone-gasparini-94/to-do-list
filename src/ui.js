@@ -1,4 +1,4 @@
-import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject, filterAll, filterToday, filterCompleted, getFilteredTodos } from "./logic";
+import { addTodo, deleteTodo, addProject, getActiveProject, getProjects, setActiveProject, filterAll, filterToday, filterCompleted, getFilteredTodos, toggleComplete } from "./logic";
 import { format } from "date-fns";
 
 export function renderProjectsButtons() {
@@ -24,8 +24,7 @@ export function renderProjectsButtons() {
         projectBtn.append(svg, span);
         projectsContainer.append(projectBtn);
         projectBtn.addEventListener("click", changeActiveProject);
-        projectBtn.addEventListener("click", findActiveFilter);
-        projectBtn.addEventListener("click", renderTodos);
+        projectBtn.addEventListener("click", renderFilteredTodos);
         projectBtn.addEventListener("click", setHeader);
     })
 }
@@ -45,7 +44,7 @@ export function handleAddTodo() {
         const titleInput = document.createElement("input");
         titleInput.classList.add("todo-title-input");
         titleInput.type = "text";
-        titleInput.placeholder = "don't forget to...";
+        titleInput.placeholder = "new...";
         const dueToContainer = document.createElement("div");
         dueToContainer.classList.add("due-to-container");
         const dueTo = document.createElement("input");
@@ -89,7 +88,7 @@ export function handleAddTodo() {
 function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
     if (event.key === "Enter" && titleInput.value.trim()) {
         addTodo(titleInput.value, dueTo.value, activeProject.name);
-        renderTodos();
+        renderFilteredTodos();
     } else if (event.key === "Escape") {
         event.currentTarget.remove();
     }
@@ -98,13 +97,14 @@ function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
 function handleAddPressTodo(titleInput, dueTo, activeProject) {
     if (titleInput.value.trim()) {
         addTodo(titleInput.value, dueTo.value, activeProject.name);
-        renderTodos();
+        changeFilterToAll();
     }
 }
 
 function handleCancelBtn() {
     const div = document.querySelector(".new-todo-div");
     div.remove();
+    renderTodos();
 }
 
 export function handleAddProject() {
@@ -159,13 +159,13 @@ export function renderTodos() {
         checkbox.type = "checkbox";
         checkbox.classList.add("checkbox");
         const textContainer = document.createElement("div");
-        textContainer.classList.add("text-container")
+        textContainer.classList.add("text-container");
         const span = document.createElement("span");
         span.classList.add("task-title");
         span.textContent = todo.title;
         const date = document.createElement("span");
         date.classList.add("date");
-        date.textContent = format(todo.dueTo, "dd/MM/yyyy");
+        date.textContent = todo.dueTo ? format(todo.dueTo, "dd.MM.yyy") : null;
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-btn");
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -182,9 +182,13 @@ export function renderTodos() {
         textContainer.append(span, date);
         div.append(checkbox, textContainer, deleteBtn);
         todoContainer.append(div);
+        checkbox.addEventListener("click", () => {
+            toggleComplete(span.textContent);
+            setTimeout(renderFilteredTodos, 600);
+        });
         deleteBtn.addEventListener("click", () => {
             deleteTodo(span.textContent);
-            renderTodos();
+            renderFilteredTodos();
         });
     })
 }
@@ -200,7 +204,7 @@ export function setHeader() {
     header.textContent = projectName;
 }
 
-export function findActiveFilter() {
+export function renderFilteredTodos() {
     const activeFilter = document.querySelector(".filter.active");
     if (activeFilter.id === "all-filter-btn") {
         filterAll();
@@ -220,27 +224,15 @@ export function changeActiveFilter(event) {
     const filterBtns = document.querySelectorAll(".filter");
     filterBtns.forEach(btn => btn.classList.remove("active"));
     event.currentTarget.classList.add("active");
-    const activeFilter = document.querySelector(".filter.active");
-    if (activeFilter.id === "all-filter-btn") {
-        filterAll();
-        renderTodos();
-    }
-    if (activeFilter.id === "today-filter-btn") {
-        filterToday();
-        renderTodos();
-    }
-    if (activeFilter.id === "completed-filter-btn") {
-        filterCompleted();
-        renderTodos();
-    }
+    renderFilteredTodos();
 }
 
 export function changeFilterToAll() {
-    filterAll();
     const filterBtns = document.querySelectorAll(".filter");
     filterBtns.forEach(btn => btn.classList.remove("active"));
     const filterAllBtn = document.querySelector("#all-filter-btn");
-    filterAllBtn.classList.add("active")
+    filterAllBtn.classList.add("active");
+    renderFilteredTodos();
 }
 
 

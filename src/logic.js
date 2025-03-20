@@ -1,3 +1,5 @@
+import { format } from "date-fns";
+
 const projects = [];
 let activeProject = null;
 let filteredTodos = null;
@@ -14,7 +16,7 @@ class Project {
 class Todo {
     constructor(title, dueTo, projectName) {
         this.title = title;
-        this.dueTo = new Date(dueTo);
+        this.dueTo = dueTo ? new Date(dueTo) : null;
         this.project = projectName;
         this.completed = false;
 
@@ -32,8 +34,17 @@ export function addTodo(title, dueTo, projectName) {
 }
 
 export function deleteTodo(title) {
-    let indexToRemove = activeProject.list.findIndex((todo) => todo.title === title);
-    activeProject.list.splice(indexToRemove, 1);
+    let index = activeProject.list.findIndex((todo) => todo.title === title);
+    activeProject.list.splice(index, 1);
+}
+
+export function toggleComplete(title) {
+    let todo = activeProject.list.find((todo) => todo.title === title);
+    if (todo.completed === false) {
+        todo.completed = true;
+    } else {
+        todo.completed = false;
+    }
 }
 
 export function getProjects() {
@@ -61,13 +72,12 @@ export function filterAll() {
 }
 
 export function filterToday() {
-    const today = new Date().toISOString().slice(0, 10);
-    filteredTodos = activeProject.list.filter(todo => todo.completed === false).filter(todo => todo.dueTo === today);
+    const today = format(new Date(), "dd.MM.yyyy");
+    filteredTodos = activeProject.list.filter(todo => todo.completed === false).filter(todo => format(todo.dueTo, "dd.MM.yyyy") === today);
 }
 
 export function filterCompleted() {
     filteredTodos = activeProject.list.filter(todo => todo.completed === true);
-    console.log(filteredTodos);
 }
 
 function createInitialProjects() {

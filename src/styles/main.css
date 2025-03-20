@@ -84,6 +84,7 @@
 .checkbox,
 .fake-checkbox {
     appearance: none;
+    cursor: pointer;
     -webkit-appearance: none;
     -moz-appearance: none;
     width: 1rem;
@@ -92,8 +93,8 @@
     border-radius: 50%;
 }
 
-.checkbox:checked {
-    background-color: var(--light-grey);
+.checkbox:focus {
+    background-color: var(--dark-grey);
 }
 
 .text-container,
