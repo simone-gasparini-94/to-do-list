@@ -28,8 +28,12 @@
     font-size: 1rem;
     gap: 0.2rem;
     padding: 1rem 0;
-    color: var(--dark-grey);
+    color: var(--grey);
     border-bottom: 0.1px solid var(--light-grey);
+}
+
+.project-btn:hover {
+    color: var(--dark-grey);
 }
 
 .new-project-div {
@@ -64,6 +68,10 @@
     font-size: 0.8rem;
 }
 
+#add-project-btn:hover {
+    color: var(--dark-grey);
+}
+
 #icon-add-project {
-    color: var(--grey);
+    color: currentColor;
 }

@@ -8,7 +8,7 @@
     padding: 1.2rem 2rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .top-bar-left {
@@ -53,6 +53,10 @@
     font-size: 0.8rem;
     gap: 0.2rem;
     color: var(--grey);
+}
+
+#add-todo-btn:hover {
+    color: var(--dark-grey);
 }
 
 .filters-container {

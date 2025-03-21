@@ -91,7 +91,6 @@ export function filterToday() {
     }
 }
 
-
 export function filterCompleted() {
     if (activeProject) {
         filteredTodos = activeProject.list.filter(todo => todo.completed === true);
