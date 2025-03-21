@@ -16,7 +16,7 @@ class Project {
 class Todo {
     constructor(title, dueTo, projectName, completed) {
         this.title = title;
-        this.dueTo = dueTo ? new Date(dueTo) : null;
+        this.dueTo = dueTo ? new Date(dueTo) : new Date("3000-01-01");
         this.project = projectName;
         this.completed = completed;
 

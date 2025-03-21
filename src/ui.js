@@ -179,7 +179,7 @@ export function renderTodos() {
         span.textContent = todo.title;
         const date = document.createElement("span");
         date.classList.add("date");
-        date.textContent = todo.dueTo ? format(todo.dueTo, "dd.MM.yyy") : null;
+        date.textContent = todo.dueTo.getFullYear() !== 3000 ? format(todo.dueTo, "dd.MM.yyy") : null;
         const deleteBtn = document.createElement("button");
         deleteBtn.classList.add("delete-btn");
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
