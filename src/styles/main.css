@@ -39,9 +39,8 @@
     color: var(--grey);
 }
 
-#remove-project-btn.invisible {
-    pointer-events: none;
-    color: transparent;
+#remove-project-btn:hover {
+    color : var(--dark-grey);
 }
 
 #add-todo-btn {

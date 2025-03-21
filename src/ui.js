@@ -85,7 +85,7 @@ export function handleAddTodo() {
 
 function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
     if (event.key === "Enter" && titleInput.value.trim()) {
-        addTodo(titleInput.value, dueTo.value, activeProject.name);
+        addTodo(titleInput.value, dueTo.value, activeProject.name, false);
         renderFilteredTodos();
     } else if (event.key === "Escape") {
         event.currentTarget.remove();
@@ -94,8 +94,9 @@ function handleKeyPressTodo(event, titleInput, dueTo, activeProject) {
 
 function handleAddPressTodo(titleInput, dueTo, activeProject) {
     if (titleInput.value.trim()) {
-        addTodo(titleInput.value, dueTo.value, activeProject.name);
+        addTodo(titleInput.value, dueTo.value, activeProject.name, false);
         changeFilterToAll();
+        console.log(getActiveProject());
     }
 }
 
